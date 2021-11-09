@@ -1,0 +1,19 @@
+- Parsing de l'adresse / hostname / ip
+
+- Cree un protocole ICMP ipv4
+
+- Ouvrir un socket (?) pour envoyer le protocol et lancer le chrono
+
+- Attendre la reponse
+
+- si pas de reponse = error
+
+- sinon stop chrono et affichage
+
+
+
+
+information:
+
+- demande echo type = 8 code = 0
+- reponde echo type = 0 code = 0
