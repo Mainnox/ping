@@ -37,7 +37,8 @@ static void	check_destination(t_handle *handle)
 	bzero(&hints, sizeof(hints));
 	hints.ai_family = AF_UNSPEC;
 	hints.ai_socktype = SOCK_STREAM;
-	if (status = getaddrinfo(handle->destination, NULL, &hints, &handle->res) != 0)
+	if (status = getaddrinfo(handle->destination, NULL,
+			&hints, &handle->res)!= 0)
 	{
 		free(handle->ip);
 		error_getaddrinfo();
@@ -47,11 +48,15 @@ static void	check_destination(t_handle *handle)
 	{
 		if (tmp_ptr->ai_family == AF_INET)
 		{
-			ft_memcpy(&(handle->ip4), (void *)tmp_ptr->ai_addr, sizeof(struct sockaddr_in));
-			check_ip = inet_ntop(AF_INET, &(handle->ip4.sin_addr), handle->ip, INET_ADDRSTRLEN);
+			ft_memcpy(&(handle->ip4), (void *)tmp_ptr->ai_addr,
+						sizeof(struct sockaddr_in));
+			check_ip = inet_ntop(AF_INET, &(handle->ip4.sin_addr),
+									handle->ip, INET_ADDRSTRLEN);
 			handle->res = tmp_ptr;
 			break ;
 		}
+		if (tmp_ptr->ai_family == AF_INET6)
+			printf("Ipv6 quoi que ca veuille dire !\n");
 		tmp_ptr = tmp_ptr->ai_next;
 	}
 	if (!check_ip)
@@ -71,7 +76,9 @@ static void	check_destination(t_handle *handle)
 void		set_reverse_dns(t_handle *handle)
 {
 	char buf[NI_MAXHOST];
-	if (getnameinfo((struct sockaddr *)&(handle->ip4), sizeof(struct sockaddr_in), buf, sizeof(buf), NULL, 0, NI_NAMEREQD))
+	print_handle(handle);
+	if (getnameinfo((struct sockaddr *)&(handle->ip4),
+			sizeof(struct sockaddr_in), buf, sizeof(buf), NULL, 0, NI_NAMEREQD))
 	{
 		freeaddrinfo(handle->res);
 		free(handle->ip);

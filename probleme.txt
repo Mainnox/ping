@@ -1,0 +1,12 @@
+0) Forcer le sudo ? check avec d'autre ft_ping pour voir
+si il marche sans sudo
+
+1) probleme avec intra.42.fr
+et lyes.net pas de reverse_dns mais ip correct 
+ 
+A tester sur d'autre ping
+ #1 pas de dns ?
+ soit autruche soit douille
+ autruche osef de ca et on prie 
+ si jamais erreur sur le reverse = osef
+ 

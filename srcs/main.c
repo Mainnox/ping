@@ -2,6 +2,18 @@
 
 bool g_loop = true;
 
+static void		check_root(void)
+{
+	uid_t		uid;
+
+	uid = getuid();
+	if (uid != 0)
+	{
+		printf("ft_ping need to be run on sudo mode for raw socket !\n");
+		exit(0);
+	}
+}
+
 static t_handle	init_handle(int argc, char **argv)
 {
 	t_handle handle;
@@ -26,6 +38,7 @@ int		main(int argc, char **argv)
 
 	if (argc == 1)
 		error_usage();
+	//check_root();
 	handle = init_handle(argc, argv);
 	parsing(&handle);
 	signal(SIGINT, StopTheCount);
